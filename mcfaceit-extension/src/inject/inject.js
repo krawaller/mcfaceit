@@ -24,3 +24,7 @@ while (node = nodes.nextNode()) {
     });
   }
 }
+
+var boaty = document.createElement("div");
+boaty.classList.add("boatymcboatfaceannoyer");
+document.body.appendChild(boaty);

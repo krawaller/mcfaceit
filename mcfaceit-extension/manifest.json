@@ -22,7 +22,8 @@
       "js": [
         "src/inject/pos.js",
         "src/inject/inject.js"
-      ]
+      ],
+      "css" : ["src/inject/boaty.css"]
     }
   ]
 }
