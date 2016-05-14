@@ -10,14 +10,11 @@ var node;
 
 while (node = nodes.nextNode()) {
   if (!blacklistedNodeNames.includes(node.parentNode.nodeName) && node.nodeValue.trim()) {
-    var handledWords;
     tagger.tag(lexer.lex(node.nodeValue)).forEach((t, i, ts) => {
       var word = t[0];
       var tag = t[1];
-      if (nouns[tag] && !(ts[i + 1] && nouns[ts[i + 1][1]]) && !(handledWords && handledWords[word])) {
-        if (!handledWords) handledWords = {};
-        handledWords[word] = 1;
-        node.nodeValue = node.nodeValue.replace(word, (occurence) => {
+      if (nouns[tag] && !(ts[i + 1] && nouns[ts[i + 1][1]])) {
+        node.nodeValue = node.nodeValue.replace(new RegExp('\\b' + word + '\\b'), (occurence) => {
           return occurence.replace(/(.)(.*)/, ($0, $1, $2) => $1 + $2 + ($2.slice(-1) !== 'y' ? 'y' : '') + ' Mc' + $1.toUpperCase() + $2 + 'face');
         });
       }
